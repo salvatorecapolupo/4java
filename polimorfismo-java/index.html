@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Polimorfismo in Java: lezioni progressive, esempi Java e quiz, con strumenti di accessibilità.">
+  <title>Polimorfismo in Java — Officina digitale</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data/corso-polimorfismo_java.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenuto">Vai al contenuto principale</a>
+  <header class="topbar">
+    <a class="brand" href="../" aria-label="Torna al catalogo di Officina digitale">
+      <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+      <span class="brand-name">officina<span>digitale</span></span>
+    </a>
+    <nav class="top-actions" aria-label="Strumenti di lettura">
+      <a class="tool-button catalog-link" href="../" aria-label="Torna al catalogo di Officina digitale">← Catalogo</a>
+      <button class="tool-button" id="font-smaller" type="button" aria-label="Riduci dimensione del testo" title="Riduci testo">A−</button>
+      <button class="tool-button" id="font-larger" type="button" aria-label="Aumenta dimensione del testo" title="Aumenta testo">A+</button>
+      <button class="tool-button" id="contrast-toggle" type="button" aria-pressed="false">Contrasto alto</button>
+      <button class="tool-button" id="reading-toggle" type="button" aria-pressed="false">Modalità lettura</button>
+    </nav>
+  </header>
+
+  <div class="page-shell" id="inizio">
+    <aside class="sidebar" aria-label="Indice del percorso">
+      <div class="sidebar-heading">
+        <span class="eyebrow">IL PERCORSO</span>
+        <p>Studia un metodo alla volta.</p>
+      </div>
+      <div class="progress-box">
+        <div class="progress-line"><span>Il tuo avanzamento</span><strong id="progress-label">0 di 0</strong></div>
+        <div class="progress-track" role="progressbar" aria-label="Avanzamento delle lezioni" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress-track"><span id="progress-fill"></span></div>
+      </div>
+      <nav id="lesson-nav" class="lesson-nav" aria-label="Lezioni"></nav>
+      <p class="sidebar-note">Non serve correre. Puoi tornare sui concetti quando vuoi.</p>
+    </aside>
+
+    <main id="contenuto" class="main-content" tabindex="-1">
+      <section class="hero" aria-labelledby="course-title">
+        <div class="hero-copy">
+          <p class="eyebrow" id="course-kicker">INFORMATICA · PERCORSO GUIDATO</p>
+          <h1 id="course-title">Java, <span>passo dopo passo</span></h1>
+          <p class="hero-intro" id="course-intro">Dalle prime istruzioni ai cicli: concetti essenziali, esempi brevi e controlli per capire se hai imparato.</p>
+          <div class="hero-meta">
+            <span><span class="meta-dot" aria-hidden="true"></span><span id="lesson-count">0 lezioni</span></span>
+            <span>Livello introduttivo</span>
+            <span>Studio al tuo ritmo</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-window"><div class="window-dots"><i></i><i></i><i></i></div><code><span class="code-purple">public class</span> <span class="code-green">Programma</span> {<br>&nbsp; <span class="code-purple">public static void</span> main(...) {<br>&nbsp;&nbsp; <span class="code-blue">// prova, osserva, capisci</span><br>&nbsp; }<br>}</code><div class="art-caption">PICCOLI PASSI, GRANDI IDEE</div></div>
+          <span class="art-orbit orbit-one"></span><span class="art-orbit orbit-two"></span>
+        </div>
+      </section>
+
+      <section class="learning-tools" aria-label="Cerca e filtra le lezioni">
+        <div class="search-wrap">
+          <label for="lesson-search">Cerca nel percorso</label>
+          <div class="search-control"><span aria-hidden="true" class="search-icon">⌕</span><input id="lesson-search" type="search" placeholder="Es. variabili, if, operatori…" autocomplete="off"><button id="clear-search" class="clear-search" type="button" hidden>Rimuovi</button></div>
+        </div>
+        <p class="search-hint" id="search-status" role="status" aria-live="polite">Tutte le lezioni sono visibili.</p>
+      </section>
+
+      <section class="welcome-card" aria-labelledby="welcome-title">
+        <div class="welcome-icon" aria-hidden="true">✦</div>
+        <div><h2 id="welcome-title">Come usare questo percorso</h2><p>Leggi l'idea principale, osserva l'esempio e poi prova a rispondere alla domanda. Puoi segnare ogni lezione come completata: l'avanzamento resta salvato su questo dispositivo.</p></div>
+      </section>
+
+      <div id="lessons" class="lessons-list" aria-label="Contenuti delle lezioni"></div>
+
+      <section class="finish-panel" id="finish-panel" aria-labelledby="finish-title">
+        <div class="finish-symbol" aria-hidden="true">✓</div>
+        <div><p class="eyebrow">UN PASSO ALLA VOLTA</p><h2 id="finish-title">La pratica rende più sicuri.</h2><p>Ripassa gli esempi, modifica i valori e prova a prevedere il risultato prima di leggerlo. Sbagliare è una parte normale dell'apprendimento.</p></div>
+        <a class="text-link" href="#inizio">Torna all'inizio ↑</a>
+      </section>
+
+      <footer class="site-footer">
+        <p>Materiale riorganizzato e aggiornato a scopo didattico. Per i dettagli tecnici, consulta sempre la documentazione ufficiale.</p>
+        <div class="source-links" id="source-links"></div>
+        <p class="footer-small">Sito statico · HTML, CSS e JavaScript · Nessun account richiesto</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
