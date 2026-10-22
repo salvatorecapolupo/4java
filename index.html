@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Percorsi didattici di Java: fondamenti ed esercizi progressivi, con attenzione a usabilità e accessibilità.">
+  <title>Officina digitale — Percorsi Java</title>
+  <style>
+    :root { color-scheme: light; --ink:#17233b; --muted:#526079; --paper:#f7f8fc; --surface:#fff; --line:#dce2ee; --brand:#3949ab; --brand-strong:#283593; --brand-soft:#e9edff; --teal:#087e8b; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font:1rem/1.65 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    a { color:var(--brand-strong); text-underline-offset:.2em; }
+    :focus-visible { outline:3px solid #dd7b00; outline-offset:3px; }
+    .skip { position:absolute; left:.75rem; top:-5rem; padding:.7rem 1rem; background:#fff; border:2px solid var(--ink); border-radius:.7rem; z-index:5; }
+    .skip:focus { top:.75rem; }
+    header { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; padding:1rem clamp(1rem,4vw,3.5rem); background:#fff; border-bottom:1px solid var(--line); }
+    .brand { display:flex; align-items:center; gap:.7rem; color:var(--ink); text-decoration:none; font-weight:850; }
+    .brand-mark { display:grid; place-items:center; width:42px; height:42px; border-radius:13px; background:var(--brand); color:#fff; font:800 1rem ui-monospace,monospace; }
+    .brand small { display:block; color:var(--brand); }
+    .header-note { margin:0; color:var(--muted); font-size:.9rem; }
+    main { width:min(1100px,100% - 2rem); margin:clamp(1.5rem,5vw,4rem) auto; }
+    .hero { padding:clamp(1.5rem,5vw,3.5rem); border:1px solid #dce2fa; border-radius:26px; background:linear-gradient(120deg,#e7ebff 0%,#f2f4ff 58%,#dff5f3 100%); }
+    .eyebrow { margin:0 0 .55rem; color:var(--brand-strong); font-size:.75rem; font-weight:850; letter-spacing:.13em; }
+    h1 { max-width:850px; margin:.2rem 0 .85rem; font-size:clamp(2.3rem,6vw,4.2rem); line-height:1.06; letter-spacing:-.055em; }
+    .intro { max-width:740px; margin:0; color:#374762; font-size:1.1rem; }
+    .stats { display:flex; flex-wrap:wrap; gap:.6rem 1.3rem; margin-top:1.4rem; color:#35445e; font-weight:700; font-size:.83rem; }
+    .section-heading { margin:2.5rem 0 1rem; }
+    .section-heading h2 { margin:0; font-size:1.55rem; letter-spacing:-.03em; }
+    .section-heading p { margin:.25rem 0 0; color:var(--muted); }
+    .catalog-group { margin-top:2.3rem; }
+    .catalog-group > h3 { margin:0 0 .8rem; font-size:1.12rem; color:var(--brand-strong); }
+    .catalog-group > p { margin:-.45rem 0 1rem; color:var(--muted); font-size:.94rem; }
+    .course { min-height:255px; }
+    .catalog-search { display:flex; flex-wrap:wrap; gap:.65rem; align-items:center; margin:1.2rem 0 1.6rem; }
+    .catalog-search label { font-weight:750; }
+    .catalog-search input { width:min(100%,470px); min-height:46px; padding:.7rem .9rem; border:1px solid var(--line); border-radius:10px; font:inherit; color:var(--ink); background:#fff; }
+    .catalog-status { color:var(--muted); font-size:.9rem; }
+    .course[hidden] { display:none; }
+    .grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; }
+    .course { display:flex; flex-direction:column; gap:.85rem; min-height:280px; padding:1.4rem; background:var(--surface); border:1px solid var(--line); border-radius:20px; box-shadow:0 12px 30px rgba(27,42,79,.06); }
+    .course-top { display:flex; align-items:center; gap:.85rem; }
+    .course-icon { display:grid; place-items:center; width:48px; height:48px; flex:0 0 48px; border-radius:14px; background:var(--brand-soft); color:var(--brand-strong); font:800 1.1rem ui-monospace,monospace; }
+    .course-label { margin:0; color:var(--brand-strong); font-size:.7rem; font-weight:850; letter-spacing:.1em; }
+    .course h3 { margin:.08rem 0 0; font-size:1.32rem; line-height:1.3; letter-spacing:-.03em; }
+    .course p { margin:0; color:var(--muted); }
+    .tags { display:flex; flex-wrap:wrap; gap:.45rem; margin-top:auto; padding-top:.3rem; }
+    .tag { padding:.25rem .55rem; border:1px solid #dfe5f0; border-radius:7px; background:#f1f4fa; color:#35435b; font-size:.78rem; font-weight:650; }
+    .course-link { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:46px; margin-top:.35rem; padding:.6rem 1rem; border-radius:10px; background:var(--brand); color:#fff; text-decoration:none; font-weight:800; }
+    .course-link:hover { background:var(--brand-strong); }
+    .howto { display:grid; grid-template-columns:auto 1fr; gap:.9rem; align-items:start; margin-top:1.5rem; padding:1.2rem 1.3rem; background:#fff; border:1px solid var(--line); border-radius:16px; }
+    .howto-icon { display:grid; place-items:center; width:40px; height:40px; border-radius:12px; background:#fff5dc; color:#6b4d00; font-weight:900; }
+    .howto h2 { margin:0 0 .25rem; font-size:1rem; }
+    .howto p { margin:0; color:var(--muted); font-size:.92rem; }
+    footer { padding:1.25rem clamp(1rem,4vw,3.5rem); background:#fff; border-top:1px solid var(--line); color:var(--muted); font-size:.84rem; }
+    footer p { max-width:1100px; margin:.25rem auto; }
+    @media (max-width:700px) { .grid { grid-template-columns:1fr; } header { align-items:flex-start; flex-direction:column; } .course { min-height:0; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
+    @media (prefers-contrast:more) { :root { --line:#555; --muted:#303030; --brand-strong:#002779; } .course,.howto { box-shadow:none; border-color:#555; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#contenuto">Vai al contenuto principale</a>
+  <header>
+    <a class="brand" href="./" aria-label="Officina digitale, pagina iniziale">
+      <span class="brand-mark" aria-hidden="true">&lt;/&gt;</span>
+      <span>officina<small>digitale</small></span>
+    </a>
+    <p class="header-note">Materiali di studio · Java · Percorsi progressivi</p>
+  </header>
+  <main id="contenuto">
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">LABORATORIO DI INFORMATICA</p>
+      <h1 id="hero-title">Impara Java, un passo alla volta.</h1>
+      <p class="intro">Una raccolta in espansione di percorsi Java: fondamenti, stringhe, array, oggetti, polimorfismo, wrapper, eccezioni, flussi di dati e concorrenza. Ogni percorso propone piccoli passi, esempi copiabili e verifiche. Le lezioni condividono la stessa interfaccia, con ricerca, codice copiabile, verifiche e strumenti di lettura.</p>
+      <div class="stats"><span>HTML, CSS e JavaScript statici</span><span>Pronto per GitHub Pages</span><span>Orientato a UX e accessibilità</span></div>
+    </section>
+    <section aria-labelledby="courses-title">
+      <div class="section-heading">
+        <h2 id="courses-title">Scegli il percorso</h2>
+        <p>Puoi seguire l'ordine proposto oppure aprire direttamente l'argomento che ti serve.</p>
+      </div>
+<div class="catalog-search"><label for="catalog-filter">Cerca un percorso</label><input id="catalog-filter" type="search" placeholder="Es. array, eccezioni, stringhe…" autocomplete="off"><span id="catalog-status" class="catalog-status" role="status" aria-live="polite">21 percorsi disponibili.</span></div>
+      <section class="catalog-group" aria-labelledby="group-1">
+        <h3 id="group-1">Fondamenti e metodi</h3>
+        <p>Le basi del linguaggio, il riuso del codice e i primi algoritmi.</p>
+        <div class="grid"><article class="course" data-search="Java, passo dopo passo FONDAMENTI Una guida ai primi programmi, input/output, variabili, tipi di dato, operatori, condizioni e cicli. 7 lezioni Livello introduttivo Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">01</span><div><p class="course-label">FONDAMENTI</p><h3>Java, passo dopo passo</h3></div></div>
+          <p>Una guida ai primi programmi, input/output, variabili, tipi di dato, operatori, condizioni e cicli.</p>
+          <div class="tags"><span class="tag">7 lezioni</span><span class="tag">Livello introduttivo</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./elementi-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Metodi Java, passo dopo passo METODI Dalla dichiarazione dei metodi a parametri, return, variabili locali, static e overloading. 10 lezioni Esempi completi Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">10</span><div><p class="course-label">METODI</p><h3>Metodi Java, passo dopo passo</h3></div></div>
+          <p>Dalla dichiarazione dei metodi a parametri, return, variabili locali, static e overloading.</p>
+          <div class="tags"><span class="tag">10 lezioni</span><span class="tag">Esempi completi</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./metodi-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Metodi e array: esercizi guidati METODI + ARRAY Problemi di classificazione, ricerca binaria, matrici e conversione in bit. 5 esercizi Soluzioni Livello progressivo">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">11</span><div><p class="course-label">METODI + ARRAY</p><h3>Metodi e array: esercizi guidati</h3></div></div>
+          <p>Problemi di classificazione, ricerca binaria, matrici e conversione in bit.</p>
+          <div class="tags"><span class="tag">5 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Livello progressivo</span></div>
+          <a class="course-link" href="./metodix-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article></div>
+      </section>
+<section class="catalog-group" aria-labelledby="group-2">
+        <h3 id="group-2">Stringhe e array</h3>
+        <p>Dai testi alle strutture dati indicizzate.</p>
+        <div class="grid"><article class="course" data-search="Stringhe in Java STRINGHE Confronti corretti, ricerca, estrazione, suddivisione e costruzione efficiente del testo. 5 lezioni Esempi brevi Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">S</span><div><p class="course-label">STRINGHE</p><h3>Stringhe in Java</h3></div></div>
+          <p>Confronti corretti, ricerca, estrazione, suddivisione e costruzione efficiente del testo.</p>
+          <div class="tags"><span class="tag">5 lezioni</span><span class="tag">Esempi brevi</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./stringhe-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Stringhe: esercizi risolti ESERCIZI STRINGHE Conversione binaria, conteggio parole, pulizia degli spazi e cifrario di Cesare didattico. 5 esercizi Codice copiabile Verifiche">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">SX</span><div><p class="course-label">ESERCIZI STRINGHE</p><h3>Stringhe: esercizi risolti</h3></div></div>
+          <p>Conversione binaria, conteggio parole, pulizia degli spazi e cifrario di Cesare didattico.</p>
+          <div class="tags"><span class="tag">5 esercizi</span><span class="tag">Codice copiabile</span><span class="tag">Verifiche</span></div>
+          <a class="course-link" href="./stringhex-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Array in Java ARRAY Dichiarazione, indici, cicli, metodi, ordinamento e copie indipendenti. 5 lezioni Vettori e matrici Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">A</span><div><p class="course-label">ARRAY</p><h3>Array in Java</h3></div></div>
+          <p>Dichiarazione, indici, cicli, metodi, ordinamento e copie indipendenti.</p>
+          <div class="tags"><span class="tag">5 lezioni</span><span class="tag">Vettori e matrici</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./array-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Array: esercizi risolti ESERCIZI ARRAY Minimo e massimo, conteggio, ricerca, inserimento e trasposizione di matrici. 5 esercizi Soluzioni Difficoltà crescente">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">AX</span><div><p class="course-label">ESERCIZI ARRAY</p><h3>Array: esercizi risolti</h3></div></div>
+          <p>Minimo e massimo, conteggio, ricerca, inserimento e trasposizione di matrici.</p>
+          <div class="tags"><span class="tag">5 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Difficoltà crescente</span></div>
+          <a class="course-link" href="./arrayx-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article></div>
+      </section>
+<section class="catalog-group" aria-labelledby="group-3">
+        <h3 id="group-3">Programmazione a oggetti</h3>
+        <p>Classi, oggetti, ereditarietà e comportamenti sostituibili.</p>
+        <div class="grid"><article class="course" data-search="Classi e oggetti in Java CLASSI E OGGETTI Campi, metodi, costruttori, incapsulamento, dati statici e composizione. 5 lezioni OOP essenziale Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">O</span><div><p class="course-label">CLASSI E OGGETTI</p><h3>Classi e oggetti in Java</h3></div></div>
+          <p>Campi, metodi, costruttori, incapsulamento, dati statici e composizione.</p>
+          <div class="tags"><span class="tag">5 lezioni</span><span class="tag">OOP essenziale</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./oggetti-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Programmazione a oggetti: esercizi ESERCIZI OOP Oggetti potenza, conto, pila, coda e gestione di orari. 5 esercizi Soluzioni Livello progressivo">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">OX</span><div><p class="course-label">ESERCIZI OOP</p><h3>Programmazione a oggetti: esercizi</h3></div></div>
+          <p>Oggetti potenza, conto, pila, coda e gestione di orari.</p>
+          <div class="tags"><span class="tag">5 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Livello progressivo</span></div>
+          <a class="course-link" href="./oggettix-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Polimorfismo in Java POLIMORFISMO Override, dispatch dinamico, collezioni polimorfe, overloading e cast sicuri. 4 lezioni OOP intermedio Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">P</span><div><p class="course-label">POLIMORFISMO</p><h3>Polimorfismo in Java</h3></div></div>
+          <p>Override, dispatch dinamico, collezioni polimorfe, overloading e cast sicuri.</p>
+          <div class="tags"><span class="tag">4 lezioni</span><span class="tag">OOP intermedio</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./polimorfismo-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Ereditarietà e polimorfismo: esercizi ESERCIZI EREDITARIETÀ Esercizi con figure, dispositivi e riuso dei metodi attraverso classi derivate. 4 esercizi Soluzioni Applicazioni">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">PX</span><div><p class="course-label">ESERCIZI EREDITARIETÀ</p><h3>Ereditarietà e polimorfismo: esercizi</h3></div></div>
+          <p>Esercizi con figure, dispositivi e riuso dei metodi attraverso classi derivate.</p>
+          <div class="tags"><span class="tag">4 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Applicazioni</span></div>
+          <a class="course-link" href="./polimorfismo-x-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Classi astratte e interfacce CLASSI ASTRATTE Contratti, implementazioni multiple e polimorfismo basato su interfacce. 4 lezioni OOP intermedio Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">AB</span><div><p class="course-label">CLASSI ASTRATTE</p><h3>Classi astratte e interfacce</h3></div></div>
+          <p>Contratti, implementazioni multiple e polimorfismo basato su interfacce.</p>
+          <div class="tags"><span class="tag">4 lezioni</span><span class="tag">OOP intermedio</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./abstract-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Classi astratte e interfacce: esercizi ESERCIZI ABSTRACT Figure, notifiche, pagamenti simulati ed esportazione tramite contratti comuni. 4 esercizi Soluzioni Applicazioni">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">ABX</span><div><p class="course-label">ESERCIZI ABSTRACT</p><h3>Classi astratte e interfacce: esercizi</h3></div></div>
+          <p>Figure, notifiche, pagamenti simulati ed esportazione tramite contratti comuni.</p>
+          <div class="tags"><span class="tag">4 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Applicazioni</span></div>
+          <a class="course-link" href="./abstractx-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article></div>
+      </section>
+<section class="catalog-group" aria-labelledby="group-4">
+        <h3 id="group-4">Tipi, robustezza e gestione degli errori</h3>
+        <p>Strumenti pratici per conversioni corrette e programmi più affidabili.</p>
+        <div class="grid"><article class="course" data-search="Classi involucro (wrapper) WRAPPER Integer, Double, autoboxing, unboxing e conversione tra testo e numeri. 4 lezioni Tipi e conversioni Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">W</span><div><p class="course-label">WRAPPER</p><h3>Classi involucro (wrapper)</h3></div></div>
+          <p>Integer, Double, autoboxing, unboxing e conversione tra testo e numeri.</p>
+          <div class="tags"><span class="tag">4 lezioni</span><span class="tag">Tipi e conversioni</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./involucro-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Gestione delle eccezioni in Java ECCEZIONI try/catch, finally, checked e unchecked, risorse e regole di validazione. 5 lezioni Robustezza Quiz rapidi">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">E</span><div><p class="course-label">ECCEZIONI</p><h3>Gestione delle eccezioni in Java</h3></div></div>
+          <p>try/catch, finally, checked e unchecked, risorse e regole di validazione.</p>
+          <div class="tags"><span class="tag">5 lezioni</span><span class="tag">Robustezza</span><span class="tag">Quiz rapidi</span></div>
+          <a class="course-link" href="./eccezioni-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+        </article>
+<article class="course" data-search="Eccezioni: esercizi risolti ESERCIZI ECCEZIONI Conversioni, divisioni, accessi agli array e operazioni che possono fallire. 5 esercizi Soluzioni Casi limite">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">EX</span><div><p class="course-label">ESERCIZI ECCEZIONI</p><h3>Eccezioni: esercizi risolti</h3></div></div>
+          <p>Conversioni, divisioni, accessi agli array e operazioni che possono fallire.</p>
+          <div class="tags"><span class="tag">5 esercizi</span><span class="tag">Soluzioni</span><span class="tag">Casi limite</span></div>
+          <a class="course-link" href="./eccezionix-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article></div>
+      </section>
+<section class="catalog-group" aria-labelledby="group-5">
+        <h3 id="group-5">Esercitazione generale</h3>
+        <p>Un percorso lungo per ripassare e consolidare algoritmi diversi.</p>
+        <div class="grid"><article class="course" data-search="Java: esercizi progressivi ESERCITAZIONI Dodici problemi risolti, dalla somma di intervalli e i numeri primi a geometria, scacchi e una simulazione finale. 12 esercizi Soluzioni complete Difficoltà crescente">
+          <div class="course-top"><span class="course-icon" aria-hidden="true">12</span><div><p class="course-label">ESERCITAZIONI</p><h3>Java: esercizi progressivi</h3></div></div>
+          <p>Dodici problemi risolti, dalla somma di intervalli e i numeri primi a geometria, scacchi e una simulazione finale.</p>
+          <div class="tags"><span class="tag">12 esercizi</span><span class="tag">Soluzioni complete</span><span class="tag">Difficoltà crescente</span></div>
+          <a class="course-link" href="./elementix-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+        </article></div>
+      </section>
+
+      <section class="catalog-group" aria-labelledby="group-6">
+        <h3 id="group-6">Stream e gestione dei file</h3>
+        <p>Dai flussi di byte e caratteri ai file testuali e binari, con risorse chiuse correttamente ed esercizi guidati.</p>
+        <div class="grid">
+          <article class="course" data-search="Stream e file in Java INPUT OUTPUT FILE lettura scrittura file flusso BufferedReader BufferedWriter Files InputStream Reader 9 lezioni progressione graduale">
+            <div class="course-top"><span class="course-icon" aria-hidden="true">18</span><div><p class="course-label">INPUT / OUTPUT</p><h3>Stream e file in Java</h3></div></div>
+            <p>Dai canali standard a lettura e scrittura di testo, byte, dati binari e serializzazione con cautele di sicurezza.</p>
+            <div class="tags"><span class="tag">9 lezioni</span><span class="tag">Base → avanzato</span><span class="tag">File e risorse</span></div>
+            <a class="course-link" href="./stream-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="course" data-search="Stream e file esercizi guidati STREAMX FILE Esercizi vettori file validazione copia record binario backup 7 esercizi">
+            <div class="course-top"><span class="course-icon" aria-hidden="true">19</span><div><p class="course-label">LABORATORIO I/O</p><h3>Stream e file — esercizi guidati</h3></div></div>
+            <p>Sette esercizi progressivi: vettori salvati su file, controllo dei dati, copia, conteggi e verifica dei backup.</p>
+            <div class="tags"><span class="tag">7 esercizi</span><span class="tag">Soluzioni guidate</span><span class="tag">Difficoltà crescente</span></div>
+            <a class="course-link" href="./streamx-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+      <section class="catalog-group" aria-labelledby="group-7">
+        <h3 id="group-7">Thread e programmazione concorrente</h3>
+        <p>Il percorso più disteso: prima i thread e il loro ciclo di vita, poi dati condivisi, sincronizzazione, code e pool di lavoro.</p>
+        <div class="grid">
+          <article class="course" data-search="Thread e concorrenza in Java THREAD Runnable start run join sleep interrupt synchronized AtomicInteger wait notify BlockingQueue ExecutorService 12 lezioni base avanzato">
+            <div class="course-top"><span class="course-icon" aria-hidden="true">20</span><div><p class="course-label">CONCORRENZA</p><h3>Thread e concorrenza in Java</h3></div></div>
+            <p>Dodici lezioni dal thread main a Runnable, join, interruzione cooperativa, race condition, sincronizzazione e ExecutorService.</p>
+            <div class="tags"><span class="tag">12 lezioni</span><span class="tag">Base → avanzato</span><span class="tag">Passi piccoli</span></div>
+            <a class="course-link" href="./thread-java/">Apri il percorso <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="course" data-search="Thread esercizi progressivi THREADX concorrenza countdown Future synchronized conto condiviso BlockingQueue interrupt pool 7 esercizi">
+            <div class="course-top"><span class="course-icon" aria-hidden="true">21</span><div><p class="course-label">LABORATORIO CONCORRENZA</p><h3>Thread — esercizi progressivi</h3></div></div>
+            <p>Metti in pratica attesa e interruzione, contatori concorrenti, saldo condiviso, produttore-consumatore e pool di lavoro.</p>
+            <div class="tags"><span class="tag">7 esercizi</span><span class="tag">Soluzioni guidate</span><span class="tag">Difficoltà crescente</span></div>
+            <a class="course-link" href="./threadx-esercizi/">Apri gli esercizi <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+    </section>
+    <aside class="howto" aria-labelledby="howto-title">
+      <div class="howto-icon" aria-hidden="true">✓</div>
+      <div><h2 id="howto-title">Un'interfaccia pensata per studiare</h2><p>In ogni percorso puoi cercare i contenuti, aumentare il testo, attivare il contrasto alto o la modalità lettura, copiare il codice, rifare i quiz e salvare il progresso sul dispositivo. Le facilitazioni sono generali: vanno affiancate alle esigenze individuali.</p></div>
+    </aside>
+  </main>
+  <footer><p>Officina digitale · Mini-siti statici per lo studio. Nessun account e nessun servizio backend necessario.</p><p>Ogni percorso riporta la propria fonte e i riferimenti tecnici consultati.</p></footer>
+<script>
+  (function () {
+    const input = document.getElementById('catalog-filter');
+    const status = document.getElementById('catalog-status');
+    if (!input || !status) return;
+    const cards = Array.from(document.querySelectorAll('.course'));
+    const groups = Array.from(document.querySelectorAll('.catalog-group'));
+    function filter() {
+      const q = input.value.trim().toLocaleLowerCase('it');
+      let shown = 0;
+      cards.forEach(card => {
+        const visible = card.dataset.search.toLocaleLowerCase('it').includes(q);
+        card.hidden = !visible;
+        if (visible) shown++;
+      });
+      groups.forEach(group => { group.hidden = !group.querySelector('.course:not([hidden])'); });
+      status.textContent = shown + (shown === 1 ? ' percorso disponibile.' : ' percorsi disponibili.');
+    }
+    input.addEventListener('input', filter);
+  })();
+</script>
+</body>
+</html>
