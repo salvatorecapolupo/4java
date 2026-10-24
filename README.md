@@ -2,6 +2,8 @@
 
 Raccolta statica di **21 percorsi Java** (3 preesistenti + 14 aggiunti in precedenza + 4 nuovi su stream e thread), costruiti con HTML, CSS e JavaScript senza framework, compilazione o backend.
 
+Inizia da qui: [https://salvatorecapolupo.github.io/4java](https://salvatorecapolupo.github.io/4java)
+
 ## Catalogo
 
 ### Fondamenti e metodi
